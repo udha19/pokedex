@@ -1,0 +1,104 @@
+<div class="modal-box  w-1/2 min-w-2xl max-h-3/4">
+    <div class="flex justify-end">
+        <button
+            class="btn self-end  btn-ghost btn-circle"
+            (click)="closeModal()"
+        >
+            <lucide-icon
+                name="circle-x"
+                class="my-icon"
+            ></lucide-icon>
+
+        </button>
+    </div>
+
+    <h3 class="text-lg font-extrabold capitalize">
+        {{data?.pokemon_species?.name}}
+        <div
+            class="badge badge-outline"
+            [style.borderColor]="data?.color"
+        >
+            #{{data?.entry_number.toString().padStart(3, "0")}}
+        </div>
+    </h3>
+
+    <div class="card-body">
+        <div class="flex flex-row">
+            <div class="flex w-1/2 justify-center place-content-center">
+                <figure class="flex ">
+                    <img
+                        class="w-50 "
+                        [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/'+data?.entry_number+'.svg'"
+                        alt="Pokemon"
+                    >
+                </figure>
+            </div>
+            <div class="flex flex-col w-1/2">
+                <div class="flex flex-col  place-content-center">
+                    <p class="text-center">Weight</p>
+                    <p class="text-center font-bold text-xl">{{data?.weight/10}} kg</p>
+                </div>
+                <div class="flex flex-col place-content-center mt-4">
+                    <p class="text-center">Height</p>
+                    <p class="text-center font-bold text-xl">{{data?.height/10}} m</p>
+                </div>
+                <div class="flex flex-col place-content-center mt-4">
+                  <p class="text-center mb-2">Type:</p>
+                    <div *ngIf="data?.types?.length < 2 && data?.types?.length > 0" class="mx-auto">
+                        <div
+                            class="badge badge-outline mx-auto"
+                            [style.borderColor]="colors[data?.types[0]?.type?.name]"
+                        >
+                            {{data?.types[0]?.type?.name}}
+                        </div>
+                    </div>
+                    <div *ngIf="data?.types?.length > 1" class="mx-auto">
+                        <div
+                            class="badge badge-outline mx-1"
+                            [style.borderColor]="colors[data?.types[0]?.type?.name]"
+                        >
+                            {{data?.types[0]?.type?.name}}
+                        </div>
+                        <div
+                            class="badge badge-outline mx-1"
+                            [style.borderColor]="colors[data?.types[1].type.name]"
+                        >
+                            {{data?.types[1].type.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr
+            class="border-2"
+            [style.borderColor]="data?.color"
+        >
+        <div class="flex flex-row h-42">
+            <div class="flex flex-col w-1/2">
+                <span class="mx-4 text-lg">Abilities</span>
+                <ul class="overflow-y-auto flex-1 ">
+                    <li
+                        *ngFor="let ability of pokemon?.abilities"
+                        class="mx-4"
+                    >
+                        {{ability.ability.name}}
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="flex flex-col w-1/2">
+                <span class="mx-4 text-lg">Move</span>
+                <ul class="overflow-y-auto flex-1 ">
+                    <li
+                        *ngFor="let move of pokemon?.moves"
+                        class="mx-4"
+                    >
+                        {{move.move.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+<figure>
+  <img
+      class="w-50 pt-8"
+      [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/'+item.entry_number+'.svg'"
+      alt="Pokemon"
+  >
+</figure>
+<div class="card-body">
+  <h2 class="card-title capitalize font-extrabold">
+      {{item.pokemon_species.name}}
+      <div
+          class="badge badge-outline"
+          [style.borderColor]="item.color"
+      >
+          #{{item.entry_number.toString().padStart(3, "0")}}
+      </div>
+  </h2>
+  <div class="flex flex-row ">
+      <div class="flex flex-col w-1/2 justify-center">
+          <p class="text-center">Weight</p>
+          <p class="text-center font-bold text-xl">{{item.weight/10}} kg</p>
+      </div>
+      <div class="flex flex-col justify-center">
+          <p class="text-center">Height</p>
+          <p class="text-center font-bold text-xl">{{item.height/10}} m</p>
+      </div>
+  </div>
+
+  <div class="card-actions justify-end gap-2">
+      <div *ngIf="item?.types?.length < 2 && item?.types?.length > 0">
+          <div
+              class="badge badge-outline"
+              [style.borderColor]="colors[item?.types[0]?.type?.name]"
+          >
+              {{item?.types[0]?.type?.name}}
+          </div>
+      </div>
+      <div *ngIf="item?.types?.length > 1">
+          <div
+              class="badge badge-outline mx-1"
+              [style.borderColor]="colors[item?.types[0]?.type?.name]"
+          >
+              {{item?.types[0]?.type?.name}}
+          </div>
+          <div
+              class="badge badge-outline mx-1"
+              [style.borderColor]="colors[item?.types[1].type.name]"
+          >
+              {{item?.types[1].type.name}}
+          </div>
+      </div>
+
+  </div>
+</div>

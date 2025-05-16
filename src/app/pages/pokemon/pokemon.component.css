@@ -1,0 +1,31 @@
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: var(--color-primary-content);
+  font-size: 20px !important;
+  color: var(--color-primary)
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-previous {
+  background: var(--color-primary);
+  font-size: 20px !important;
+  color: var(--color-accent)
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-next {
+  background: var(--color-primary);
+  font-size: 20px !important;
+  color: var(--color-accent)
+}
+
+.my-pagination ::ng-deep .ngx-pagination span {
+  font-size: 20px !important;
+  color: var(--color-primary)
+}
+
+.my-pagination ::ng-deep .ngx-pagination .ellipsis {
+  font-size: 20px !important;
+  color: var(--color-neutral)
+}
+.my-pagination ::ng-deep .ngx-pagination .disabled {
+  background: var(--color-base) !important;
+  font-size: 20px !important;
+  color: var(--color-base-content) !important;
+}
+

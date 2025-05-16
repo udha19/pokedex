@@ -1,0 +1,110 @@
+<div>
+    <div class="sticky top-0 z-50">
+        <div class="navbar bg-base-200 shadow-md px-4">
+            <div class="flex-1">
+                <a
+                    class="btn btn-ghost text-xl"
+                    [routerLink]="['/']"
+                >
+                    Pokedex
+                </a>
+            </div>
+            <div class="flex-none ml-4">
+                <button
+                    class="btn btn-ghost btn-circle"
+                    (click)="setTheme($event)"
+                >
+                    <lucide-icon
+                        name="sun"
+                        class="my-icon"
+                        *ngIf="!isDark"
+                    ></lucide-icon>
+                    <lucide-icon
+                        name="moon"
+                        class="my-icon"
+                        *ngIf="isDark"
+                    ></lucide-icon>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="flex flex-wrap justify-center gap-4 my-4 mx-4"
+        *ngIf="!loading"
+    >
+        <div
+            class="card bg-base-100 w-96 shadow-sm border-1 hover:shadow-xl"
+            *ngFor="let item of allPokemons |  paginate: { itemsPerPage: itemPages, currentPage: pages }"
+            [style.borderColor]="item.color"
+            (click)="openDetail(item)"
+        >
+            <app-card [item]="item"></app-card>
+        </div>
+    </div>
+
+    <div
+        class="flex flex-wrap justify-center gap-4 my-4 mx-4"
+        *ngIf="loading"
+    >
+        <div
+            class="card bg-base-100 w-96 shadow-sm border-1 p-4"
+            *ngFor="let item of [1,2,3,4,5]"
+        >
+            <div class="flex w-52 flex-col gap-4">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="flex flex-wrap justify-center gap-4 my-4 mx-4"
+        *ngIf="loading"
+    >
+        <div
+            class="card bg-base-100 w-96 shadow-sm border-1 p-4"
+            *ngFor="let item of [1,2,3,4,5]"
+        >
+            <div class="flex w-52 flex-col gap-4">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="flex justify-center"
+        *ngIf="!loading"
+    >
+        <pagination-controls
+            class="my-pagination"
+            [maxSize]="5"
+            (pageChange)="pages = $event"
+        ></pagination-controls>
+    </div>
+
+    <div
+        class="flex justify-center"
+        *ngIf="loading"
+    >
+        <div class="skeleton h-4 w-28"></div>
+    </div>
+
+</div>
+<dialog
+    id="detail_modal"
+    class="modal"
+    [ngClass]="{'modal': true, 'modal-open': isOpenDetail}"
+    *ngIf="selectedData?.entry_number"
+>
+    <app-detail
+        (close)="isOpenDetail = false"
+        [data]="selectedData"
+    ></app-detail>
+</dialog>
