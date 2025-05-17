@@ -66,6 +66,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
         pokemon['types'] = data.types;
         pokemon['height'] = data.height;
         pokemon['weight'] = data.weight;
+        pokemon['sprites'] = data.sprites.front_default;
         pokemon['color'] = this.colors[data.types[0].type.name]
         this.allPokemons = [...this.allPokemons];
         this.loading = false
